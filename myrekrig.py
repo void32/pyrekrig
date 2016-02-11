@@ -16,6 +16,9 @@ class Actions(Enum):
 	signalF = 10
 	signalG = 11
 
+class indhold(Enum):
+	mad, bo1, bo2
+
 
 class Bo:
 	def __init__(self, ):
