@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /usr/bin/python3
 
 from random import randint
 from enum import Enum
@@ -17,7 +17,9 @@ class Actions(Enum):
 	signalG = 11
 
 class indhold(Enum):
-	mad, bo1, bo2
+	mad = 1
+	bo1 = 2
+	bo2 = 3
 
 
 class Bo:
@@ -49,12 +51,12 @@ for i in range(nRaekker):
 # Pladser Bo Hold 1
 bo1X = randint(0, nKolonner-1)
 bo1Y = randint(0, nRaekker-1) 
-kort[bo1Y][bo1X] = 
+kort[bo1Y][bo1X] = indhold.bo1
 
 # Pladser Bo Hold 2
 bo1X = randint(0, nKolonner-1)
 bo1Y = randint(0, nRaekker-1) 
-kort[bo1Y][bo1X] = "bo1" 
+kort[bo1Y][bo1X] = indhold.bo2
 
 # Pladser Bo Hold 2
 
@@ -63,4 +65,4 @@ kort[bo1Y][bo1X] = "bo1"
 
 # Udskriv resultat
 
-print kort
+print(kort)
