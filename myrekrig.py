@@ -18,29 +18,59 @@ class Actions(Enum):
 
 class indhold(Enum):
 	mad = 1
-	bo1 = 2
-	bo2 = 3
+	bo = 2
 
 
 class Bo:
-	def __init__(self, ):
-		pass
+	def __init__(self, holdNavn, myreType):
+		self.holdNavn = holdNavn
+		self.myreType = myreType
+		self.antalMad = 1 # hvor meget mad har vi i boet: 1 mad -> 1 myer (kan laves om...)
 
-# hvordan gemmer vi hvad en myre har samlet op?
+	def __str__(self):
+		return("B:"+self.holdNavn)
+
+	def update(self):
+		self.lavNyMyrer()
+
+	def lavNyMyrer(self):
+		global kort
+		global nKolonner, nRaekker
+		for i in range(self.antalMad):
+			# Opretter lige myre en tilfaeldigt sted - det maa vi aendre senere
+			for i in range(10):
+				nyMyer = self.myreType(self.holdNavn)
+				bo1X = randint(1, nKolonner-2)
+				bo1Y = randint(1, nRaekker-2)
+				if(kort[bo1Y][bo1X] == None):
+					kort[bo1Y][bo1X] = nyMyer
+					break
+		self.mad = 0
+
+#############################################################################
+# Det er det her kode brugen skal rette i
+
+#############################################################################
 class SimpelMyre:
-	def __init__(self):
-		pass
+	def __init__(self, holdNavn):
+		self.harMad = False
+		self.holdNavn = holdNavn
+
+	def __str__(self):
+		return("M:"+self.holdNavn)
 
 	def reagere(self, input):
 		return None
+
 
 class Mad:
 	def __init__(self):
 		pass
 
+
 # Opret verden
-nRaekker = 5
-nKolonner = 10
+nRaekker = 10
+nKolonner = 15
 kort = []
 for i in range(nRaekker):
 	raekke = []
@@ -49,21 +79,35 @@ for i in range(nRaekker):
 	kort.append(raekke)
 
 # Pladser Bo Hold 1
-bo1X = randint(0, nKolonner-1)
-bo1Y = randint(0, nRaekker-1) 
-kort[bo1Y][bo1X] = indhold.bo1
+bo1X = randint(1, nKolonner-2)
+bo1Y = randint(1, nRaekker-2) 
+startBo1 = Bo("Sort", SimpelMyre)
+kort[bo1Y][bo1X] = startBo1
 
 # Pladser Bo Hold 2
-bo1X = randint(0, nKolonner-1)
-bo1Y = randint(0, nRaekker-1) 
-kort[bo1Y][bo1X] = indhold.bo2
-
-# Pladser Bo Hold 2
-
+bo1X = randint(1, nKolonner-2)
+bo1Y = randint(1, nRaekker-2) 
+startBo2 = Bo("Brun", SimpelMyre)
+kort[bo1Y][bo1X] = startBo2
 
 # Simulering
+nRunter = 10
+for i in range(nRunter):
+	startBo1.update()
+	startBo2.update()
+
+for row in kort:
+	for cell in row:
+		cell
 
 # Udskriv resultat
+def printKort():
+	out = ""
+	for row in kort:
+		for cell in row:
+			out += str(cell)+" "
+		out += "\n"
+	print(out)
 
-print((str(kort).replace("],","],\n")))
+printKort()
 
