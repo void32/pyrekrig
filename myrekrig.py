@@ -65,4 +65,5 @@ kort[bo1Y][bo1X] = indhold.bo2
 
 # Udskriv resultat
 
-print(kort)
+print((str(kort).replace("],","],\n")))
+
