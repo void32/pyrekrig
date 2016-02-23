@@ -47,11 +47,22 @@ class Bo:
 					break
 		self.mad = 0
 
+class Myre:
+	def __init__(self, holdNavn):
+		self.harMad = False
+		self.holdNavn = holdNavn
+
+	def __str__(self):
+		return("M:"+self.holdNavn)
+
+	def reagere(self, input):
+		return None
+
 #############################################################################
 # Det er det her kode brugen skal rette i
 
 #############################################################################
-class SimpelMyre:
+class SimpelMyre(Myre):
 	def __init__(self, holdNavn):
 		self.harMad = False
 		self.holdNavn = holdNavn
@@ -98,7 +109,8 @@ for i in range(nRunter):
 
 for row in kort:
 	for cell in row:
-		cell
+		if(hasattr(cell,"update")):
+			cell.update()
 
 # Udskriv resultat
 def printKort():
