@@ -58,6 +58,7 @@ class Myre:
 	def reagere(self, input):
 		return None
 
+
 #############################################################################
 # Det er det her kode brugen skal rette i
 
@@ -70,7 +71,7 @@ class SimpelMyre(Myre):
 	def __str__(self):
 		return("M:"+self.holdNavn)
 
-	def reagere(self, input):
+	def update(self, input):
 		return None
 
 
@@ -109,8 +110,9 @@ for i in range(nRunter):
 
 for row in kort:
 	for cell in row:
-		if(hasattr(cell,"update")):
-			cell.update()
+		if(hasattr(cell,"reagere")):
+			myre_omgivelser = None
+			cell.reagere(myre_omgivelser)
 
 # Udskriv resultat
 def printKort():
